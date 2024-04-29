@@ -16,7 +16,7 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
-![Image](image/Azure.png)
+![Image](image/1.png)
 
 ## 2. Install Kube-Prometheus-Stack on cluster
 
