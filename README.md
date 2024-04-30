@@ -29,11 +29,15 @@ This will install the kube-prometheus stack, a collection of Kubernetes manifest
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ```
+![Image](image/3.png)
+![Image](image/4.png)
+![Image](image/6.png)
 
 2.2. Install Grafana and Prometheus:
 ```bash
 helm upgrade --install grafana prometheus-community/kube-prometheus-stack
 ```
+![Image](image/7.png)
 
 ## 3. Install PostgreSQL database on cluster
 
@@ -43,17 +47,13 @@ helm upgrade --install grafana prometheus-community/kube-prometheus-stack
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
+![Image](image/2.png)
 
 3.2. Install PostgreSQL using Helm:
 ```bash
 helm install postgresql-dev bitnami/postgresql
 ```
-
-3.3. Verify PostgreSQL installation:
-```bash
-kubectl get pods
-kubectl get secret/postgresql-dev -oyaml
-```
+![Image](image/5.png)
 
 3.4. Access PostgreSQL and set password:
 ```bash
@@ -62,6 +62,8 @@ echo OTYwV0FRemZHZA== | base64 -d
 POSTGRES_PASSWORD="Zuq6ldS8SS"
 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 10.111.34.136 -U postgres -d postgres -p 5432
 ```
+![Image](image/9.png)
+![Image](image/10.png)
 
 3.5. Create a database and table:
 ```sql
@@ -70,6 +72,21 @@ PGPASSWORD="$POSTGRES_PASSWORD" psql --host 10.111.34.136 -U postgres -d testdb 
 CREATE TABLE hello_world (region text, country text, year int, production int, consumption int);
 INSERT INTO hello_world (region, country, year, production, consumption) VALUES ('America', 'USA', 1998, 2014, 12897);
 ```
+![Image](image/11.png)
+![Image](image/12.png)
+![Image](image/13.png)
+
+##Port forward to access exporter:
+```bash
+kubectl port-forward service/grafana 3000:80
+```
+![Image](image/14.png)
+![Image](image/15.png)
+![Image](image/16.png)
+
+
+##Change PostgreSQL spec type from ClusterIp to LoadBalancer:
+![Image](image/17.png)
 
 ## 4. Install Prometheus Postgres Exporter
 
@@ -80,6 +97,7 @@ INSERT INTO hello_world (region, country, year, production, consumption) VALUES 
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ```
+![Image](image/29.png)
 
 4.2. Install Prometheus Postgres Exporter:
 - Create postgress-exporter-values.yaml
@@ -103,11 +121,17 @@ serviceMonitor:
 ```bash
 helm upgrade --install postgres-exporter prometheus-community/prometheus-postgres-exporter -f postgress-exporter-values.yaml
 ```
+![Image](image/28.png)
+![Image](image/41.png)
+
 
 4.3. Port forward to access exporter:
 ```bash
 kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 ```
+![Image](image/30.png)
+![Image](image/31.png)
+![Image](image/32.png)
 
 ## 5. Install Prometheus Mysql Exporter Dashboard
 
@@ -115,7 +139,14 @@ kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 
 5.1. Access Grafana dashboard and add PostgreSQL exporter dashboard ID: 12485
 
-## 6. Newest installation instructions: MetalLB versions 0.13 and higher
+![Image](image/33.png)
+![Image](image/34.png)
+![Image](image/36.png)
+![Image](image/37.png)
+![Image](image/38.png)
+![Image](image/39.png)
+
+## 6.  Install MetalLB
 
 #### Steps:
 
@@ -123,6 +154,7 @@ kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
 ```
+![Image](image/19.png)
 
 6.2. Create ipaddresses.yml file:
 
@@ -151,16 +183,31 @@ metadata:
 kubectl create -f ipaddresses.yml
 kubectl create -f layer2.yml
 ```
+![Image](image/21.png)
+
+6.5. External Ip Assigned:
+
+![Image](image/22.png)
 
 ## 7. Implemented data persistence using PersistentVolumeClaims:
+
+![Image](image/42.png)
 
 ## 8. Deleting PostgreSQL pod:
 ```bash
 kubectl delete pod postgresql-dev-0 --grace-period=0
 ```
-## 9. Testing and Screen Cast
+## 9. Alert and Screen Cast
+- Setting up Alert.
+  
+![Image](image/43.png)
+![Image](image/44.png)
+![Image](image/45.png)
+![Image](image/46.png)
+![Image](image/47.png)
+![Image](image/48.png)
 
-Test the setup and record a screencast demonstrating the functionality. 
+- Test the setup and record a screencast demonstrating the functionality.
 
 
 ---
