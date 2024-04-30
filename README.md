@@ -133,7 +133,7 @@ kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 ![Image](image/31.png)
 ![Image](image/32.png)
 
-## 5. Install Prometheus Mysql Exporter Dashboard
+## 5. Install Prometheus Postgresql Exporter Dashboard
 
 ### Steps:
 
