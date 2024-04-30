@@ -24,7 +24,7 @@ This will install the kube-prometheus stack, a collection of Kubernetes manifest
 
 ### Steps:
 
-2.1. Add Prometheus community Helm repository:
+## 2.1. Add Prometheus community Helm repository:
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -33,7 +33,7 @@ helm repo update
 ![Image](image/4.png)
 ![Image](image/6.png)
 
-2.2. Install Grafana and Prometheus:
+## 2.2. Install Grafana and Prometheus:
 ```bash
 helm upgrade --install grafana prometheus-community/kube-prometheus-stack
 ```
@@ -43,19 +43,19 @@ helm upgrade --install grafana prometheus-community/kube-prometheus-stack
 
 ### Steps:
 
-3.1. Add Bitnami Helm repository:
+## 3.1. Add Bitnami Helm repository:
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 ![Image](image/2.png)
 
-3.2. Install PostgreSQL using Helm:
+## 3.2. Install PostgreSQL using Helm:
 ```bash
 helm install postgresql-dev bitnami/postgresql
 ```
 ![Image](image/5.png)
 
-3.4. Access PostgreSQL and set password:
+## 3.4. Access PostgreSQL and set password:
 ```bash
 kubectl exec -it pod/postgresql-dev-0 sh
 echo OTYwV0FRemZHZA== | base64 -d
@@ -65,7 +65,7 @@ PGPASSWORD="$POSTGRES_PASSWORD" psql --host 10.111.34.136 -U postgres -d postgre
 ![Image](image/9.png)
 ![Image](image/10.png)
 
-3.5. Create a database and table:
+## 3.5. Create a database and table:
 ```sql
 CREATE DATABASE testdb;
 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 10.111.34.136 -U postgres -d testdb -p 5432
@@ -92,14 +92,14 @@ kubectl port-forward service/grafana 3000:80
 
 ### Steps:
 
-4.1. Add Prometheus community Helm repository:
+## 4.1. Add Prometheus community Helm repository:
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ```
 ![Image](image/29.png)
 
-4.2. Install Prometheus Postgres Exporter:
+## 4.2. Install Prometheus Postgres Exporter:
 - Create postgress-exporter-values.yaml
 ```yaml
 config:
@@ -124,8 +124,7 @@ helm upgrade --install postgres-exporter prometheus-community/prometheus-postgre
 ![Image](image/28.png)
 ![Image](image/41.png)
 
-
-4.3. Port forward to access exporter:
+## 4.3. Port forward to access exporter:
 ```bash
 kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 ```
@@ -137,7 +136,7 @@ kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 
 ### Steps:
 
-5.1. Access Grafana dashboard and add PostgreSQL exporter dashboard ID: 12485
+## 5.1. Access Grafana dashboard and add PostgreSQL exporter dashboard ID: 12485
 
 ![Image](image/33.png)
 ![Image](image/34.png)
@@ -150,13 +149,13 @@ kubectl port-forward svc/postgres-exporter-prometheus-postgres-exporter 8080:80
 
 #### Steps:
 
-6.1. Install MetalLB using single-line manifest installation:
+## 6.1. Install MetalLB using single-line manifest installation:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.5/config/manifests/metallb-native.yaml
 ```
 ![Image](image/19.png)
 
-6.2. Create ipaddresses.yml file:
+## 6.2. Create ipaddresses.yml file:
 
 ```yaml
 apiVersion: metallb.io/v1beta1 
@@ -169,7 +168,7 @@ spec:
   - 10.1.149.240-10.1.149.250
 ```
 
-6.3. Create layer2.yml file:
+## 6.3. Create layer2.yml file:
 ```yaml
 apiVersion: metallb.io/v1beta1 
 kind: L2Advertisement 
@@ -178,14 +177,14 @@ metadata:
   namespace: metallb-system
 ```
 
-6.4. Apply both files to Kubernetes cluster:
+## 6.4. Apply both files to Kubernetes cluster:
 ```bash
 kubectl create -f ipaddresses.yml
 kubectl create -f layer2.yml
 ```
 ![Image](image/21.png)
 
-6.5. External Ip Assigned:
+## 6.5. External Ip Assigned:
 
 ![Image](image/22.png)
 
@@ -198,7 +197,7 @@ kubectl create -f layer2.yml
 kubectl delete pod postgresql-dev-0 --grace-period=0
 ```
 ## 9. Alert and Screen Cast
-- Setting up Alert.
+### Step 1: Setting up Alert.
   
 ![Image](image/43.png)
 ![Image](image/44.png)
@@ -207,7 +206,11 @@ kubectl delete pod postgresql-dev-0 --grace-period=0
 ![Image](image/47.png)
 ![Image](image/48.png)
 
-- Test the setup and record a screencast demonstrating the functionality.
+### Step 2: Record Screencast
+
+[Working-Watch the Screencast](https://www.dropbox.com/scl/fi/by5j3qncl3n9r969md5zn/Screencast-from-30-04-24-03-44-45-AM-IST.webm?rlkey=nneju92mb6ecqpswrq38ul1xm&st=u1bealjy&dl=0)
+
+[Setup&Testing-Watch the Screencast](https://www.dropbox.com/scl/fi/vewdxbl9n2o7l6mswfg8d/Monitoring.webm?rlkey=tf3a4usvn1ekgujyxlo9pmhk7&dl=0)
 
 
 ---
