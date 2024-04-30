@@ -210,7 +210,7 @@ kubectl delete pod postgresql-dev-0 --grace-period=0
 
 [Working-Watch the Screencast](https://www.dropbox.com/scl/fi/by5j3qncl3n9r969md5zn/Screencast-from-30-04-24-03-44-45-AM-IST.webm?rlkey=nneju92mb6ecqpswrq38ul1xm&st=u1bealjy&dl=0)
 
-[Setup&Testing-Watch the Screencast](https://www.dropbox.com/scl/fi/vewdxbl9n2o7l6mswfg8d/Monitoring.webm?rlkey=tf3a4usvn1ekgujyxlo9pmhk7&dl=0)
+[Setup&Testing-Watch the Screencast](https://www.dropbox.com/scl/fi/45suwapa8q48kc3wcwwfq/Screencast-from-30-04-24-01-58-42-AM-IST.webm?rlkey=c0qurwt1rqj0omyvl4ee14ope&st=5ypbnoi9&dl=0)
 
 
 ---
