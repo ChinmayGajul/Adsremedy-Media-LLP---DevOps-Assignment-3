@@ -76,7 +76,7 @@ INSERT INTO hello_world (region, country, year, production, consumption) VALUES 
 ![Image](image/12.png)
 ![Image](image/13.png)
 
-##Port forward to access exporter:
+## Port forward to access exporter:
 ```bash
 kubectl port-forward service/grafana 3000:80
 ```
@@ -85,7 +85,7 @@ kubectl port-forward service/grafana 3000:80
 ![Image](image/16.png)
 
 
-##Change PostgreSQL spec type from ClusterIp to LoadBalancer:
+## Change PostgreSQL spec type from ClusterIp to LoadBalancer:
 ![Image](image/17.png)
 
 ## 4. Install Prometheus Postgres Exporter
