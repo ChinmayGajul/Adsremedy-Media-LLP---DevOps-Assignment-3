@@ -1,9 +1,9 @@
 ---
 
-# DevOps Assignment 3: Advanced Kubernetes
+# Kubernetes-Postgres-Persistence-And-Monitoring-with-Prometheus-and-Grafanas
 
 ## Objective:
-Expand the existing Kubernetes cluster that I created in Assignment 2 to complete this assignment. Add PostgreSQL to the cluster. Also add Prometheus and Grafana to monitor PostgreSQL and ensure data persistence for all of them that will prevent data loss during crashes/restarts.
+Expand the existing Kubernetes cluster that I created in Kubernetes-Dynamic-Scaling-with-HPA-and-Load-Testing to complete this Project. Add PostgreSQL to the cluster. Also add Prometheus and Grafana to monitor PostgreSQL and ensure data persistence for all of them that will prevent data loss during crashes/restarts.
 
 ## Steps:
 
